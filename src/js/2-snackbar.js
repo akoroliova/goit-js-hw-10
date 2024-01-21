@@ -1,44 +1,23 @@
-const feedbackForm = document.querySelector('form.feedback-form');
-const localStorageKey = 'feedback-form-state';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
-const populateFieldsFromLocalStorage = () => {
-  const storedObject = localStorage.getItem(localStorageKey);
-  if (storedObject === null) {
-    return;
-  }
-  const parsedStoredObject = JSON.parse(storedObject);
-  feedbackForm.elements.email.value = parsedStoredObject.email;
-  feedbackForm.elements.message.value = parsedStoredObject.message;
-};
-populateFieldsFromLocalStorage();
+const promiseCreationForm = document.querySelector('form.form');
 
-const getInputValues = () => {
-  const email = feedbackForm.elements.email.value.trim();
-  const message = feedbackForm.elements.message.value.trim();
-  return { email, message };
-};
+// Напиши скрипт, який після сабміту форми створює проміс. В середині колбека цього промісу через вказану користувачем кількість мілісекунд проміс має виконуватися (при fulfilled) або відхилятися (при rejected), залежно від обраної опції в радіокнопках. Значенням промісу, яке передається як аргумент у методи resolve/reject, має бути значення затримки в мілісекундах.
 
-function handleInput(event) {
-  const values = getInputValues();
+// Створений проміс треба опрацювати у відповідних для вдалого/невдалого виконання методах.
 
-  localStorage.setItem(localStorageKey, JSON.stringify(values));
-}
+//Повідомлення, що виводиться, містить тип обраного стейту і кількість мілісекунд згідно з шаблоном в умові.
 
-function handleSubmit(event) {
-  event.preventDefault();
-  const values = getInputValues();
+// Якщо проміс виконується вдало, виводь у консоль наступний рядок, де delay — це значення затримки виклику промісу в мілісекундах.
 
-  if (values.email === '' || values.message === '') {
-    return alert('All form fields must be filled in');
-  }
+// `✅ Fulfilled promise in ${delay}ms`;
 
-  const parsedStoredObject = JSON.parse(localStorage.getItem(localStorageKey));
-  console.log(parsedStoredObject);
+// Якщо проміс буде відхилено, то виводь у консоль наступний рядок, де delay — це значення затримки промісу в мілісекундах.
 
-  localStorage.removeItem(localStorageKey);
+// `❌ Rejected promise in ${delay}ms`;
 
-  feedbackForm.reset();
-}
+//При обранні стану в радіокнопках і натисканні на кнопку Create notification з’являється повідомлення, відповідного до обраного стану стилю, із затримкою в кількість мілісекунд, переданих в інпут.
 
-feedbackForm.addEventListener('input', handleInput);
-feedbackForm.addEventListener('submit', handleSubmit);
+//promiseCreationForm.addEventListener('input', handleInput);
+//promiseCreationForm.addEventListener('submit', handleSubmit);
