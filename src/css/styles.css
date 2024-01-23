@@ -29,12 +29,17 @@ button[data-start] {
   padding: 8px 16px;
   border-radius: 8px;
   border-style: none;
-  background: #CFCFCF;
-  color: #989898;
+  background: #4E75FF;
+  color: #FFF;
   font-family: inherit;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04em;
+}
+
+button[data-start]:disabled {
+  background: #CFCFCF;
+  color: #989898;
 }
 
 .timer {
