@@ -3,6 +3,9 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const now = Date.now();
+//console.log(date.getTime()); // 1624021654154
+
 const options = {
   enableTime: true,
   //чомусь не відображаються хвилини:секунди
@@ -13,10 +16,10 @@ const options = {
   // Метод onClose() з об'єкта параметрів викликається щоразу під час закриття елемента інтерфейсу, який створює flatpickr. Саме в ньому варто обробляти дату, обрану користувачем. Параметр selectedDates — це масив обраних дат, тому ми беремо перший елемент selectedDates[0].
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-    console.log(Date(Date.now));
+
     // Напиши скрипт таймера, який здійснює зворотний відлік до певної дати.
     //При обранні дати з минулого, кнопка Start стає неактивною і з’являється повідомлення з текстом "Please choose a date in the future".
-    if (selectedDates[0] < Date.now || selectedDates[0] === null) {
+    if (selectedDates[0] < now || selectedDates[0] === null) {
       window.alert('Please choose a date in the future');
       //і зроби кнопку «Start» не активною.
       //Якщо користувач вибрав валідну дату (в майбутньому), кнопка «Start» стає активною.
