@@ -3,8 +3,11 @@ import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const inputField = document.querySelector('input#datetime-picker');
 const button = document.querySelector('button');
 button.disabled = true;
+
+let userSelectedDate;
 
 const options = {
   enableTime: true,
@@ -27,10 +30,10 @@ const options = {
 };
 const flatpickrInstance = flatpickr('#datetime-picker', options);
 
-let userSelectedDate;
-
 const handleSubmit = event => {
   event.preventDefault();
+  button.disabled = true;
+  inputField.disabled = true;
 
   function convertMs(ms) {
     // Number of milliseconds per unit of time
@@ -59,7 +62,6 @@ const handleSubmit = event => {
   const intervalId = setInterval(() => {
     const differenceInMs = userSelectedDate - Date.now();
     const result = convertMs(differenceInMs);
-    button.disabled = true;
 
     function addLeadingZero(value) {
       return value.length < 2 ? value.padStart(2, '0') : value;
@@ -77,7 +79,6 @@ const handleSubmit = event => {
       result.seconds <= 0
     ) {
       clearInterval(intervalId);
-      console.log('Interval cleared!');
     }
   }, 1000);
 };
